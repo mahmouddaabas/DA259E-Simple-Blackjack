@@ -28,9 +28,6 @@ namespace SimpleBlackjack.MoveToClassLibrary
             playerHand = new Hand(numcards);
             dealerHand = new Hand(numcards);
 
-            playerHand = new Hand(numcards);
-            dealerHand = new Hand(numcards);
-
             playerHand.dealCards(currentdeck, numcards);
             form.showCardsPlayer(playerHand);
             playerHand.evaluateHand();
@@ -81,9 +78,13 @@ namespace SimpleBlackjack.MoveToClassLibrary
                 {
                     form.getBottomTxt().Text = "Dealer blackjack, you lose!";
                 }
-                else if(dealerHand.score > playerHand.score)
+                else if(dealerHand.score > playerHand.score && dealerHand.score < 21)
                 {
                     form.getBottomTxt().Text = "Dealer won with: " + dealerHand.score;
+                }
+                else if(dealerHand.score > 21)
+                {
+                    form.getBottomTxt().Text = "Dealer bust you win!";
                 }
                 else if(dealerHand.score == playerHand.score)
                 {

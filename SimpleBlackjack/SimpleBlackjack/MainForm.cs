@@ -22,25 +22,8 @@ namespace SimpleBlackjack
             MessageBox.Show(text);
         }
 
-        public void hideAllCards()
-        {
-            card1_box.Visible = false;
-            card2_box.Visible = false;
-            card3_box.Visible = false;
-            card4_box.Visible = false;
-            card5_box.Visible = false;
-            card6_box.Visible = false;
-            card7_box.Visible = false;
-            dealer_box1.Visible = false;
-            dealer_box2.Visible = false;
-            dealer_box3.Visible = false;
-            dealer_box4.Visible = false;
-            dealer_box5.Visible = false;
-        }
-
         private void startgame_btn_Click(object sender, EventArgs e)
         {
-            //gc.test();
             startgame_btn.Enabled = false;
         }
 
@@ -351,5 +334,21 @@ namespace SimpleBlackjack
                 }
         }
         #endregion
+
+        public void hideAllCards()
+        {
+            card1_box.Visible = false;
+            card2_box.Visible = false;
+            card3_box.Visible = false;
+            card4_box.Visible = false;
+            card5_box.Visible = false;
+            card6_box.Visible = false;
+            card7_box.Visible = false;
+            dealer_box1.Visible = false;
+            dealer_box2.Visible = false;
+            dealer_box3.Visible = false;
+            dealer_box4.Visible = false;
+            dealer_box5.Visible = false;
+        }
     }
 }
