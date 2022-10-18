@@ -46,6 +46,8 @@
             this.dealer_box1 = new System.Windows.Forms.PictureBox();
             this.dealer_box5 = new System.Windows.Forms.PictureBox();
             this.dealer_box4 = new System.Windows.Forms.PictureBox();
+            this.dealer_lbl = new System.Windows.Forms.Label();
+            this.player_lbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card2_box)).BeginInit();
@@ -227,11 +229,33 @@
             this.dealer_box4.TabIndex = 22;
             this.dealer_box4.TabStop = false;
             // 
+            // dealer_lbl
+            // 
+            this.dealer_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.dealer_lbl.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.dealer_lbl.Location = new System.Drawing.Point(184, 121);
+            this.dealer_lbl.Name = "dealer_lbl";
+            this.dealer_lbl.Size = new System.Drawing.Size(112, 39);
+            this.dealer_lbl.TabIndex = 23;
+            this.dealer_lbl.Text = "Dealer:";
+            // 
+            // player_lbl
+            // 
+            this.player_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.player_lbl.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.player_lbl.Location = new System.Drawing.Point(173, 423);
+            this.player_lbl.Name = "player_lbl";
+            this.player_lbl.Size = new System.Drawing.Size(137, 39);
+            this.player_lbl.TabIndex = 24;
+            this.player_lbl.Text = "Player 0:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1368, 756);
+            this.Controls.Add(this.player_lbl);
+            this.Controls.Add(this.dealer_lbl);
             this.Controls.Add(this.dealer_box4);
             this.Controls.Add(this.dealer_box5);
             this.Controls.Add(this.dealer_box1);
@@ -289,5 +313,7 @@
         private PictureBox dealer_box1;
         private PictureBox dealer_box5;
         private PictureBox dealer_box4;
+        private Label dealer_lbl;
+        private Label player_lbl;
     }
 }

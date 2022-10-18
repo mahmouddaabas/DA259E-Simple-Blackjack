@@ -30,7 +30,7 @@ namespace SimpleBlackjack
         private void deal_btn_Click(object sender, EventArgs e)
         {
             gc.deal();
-            deal_btn.Enabled = false;
+            //deal_btn.Enabled = false;
         }
 
         private void hit_btn_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace SimpleBlackjack
         private void stand_btn_Click(object sender, EventArgs e)
         {
             gc.stand();
-            stand_btn.Enabled = false;
+            //stand_btn.Enabled = false;
         }
 
         public Button getStartBtn()
@@ -59,14 +59,19 @@ namespace SimpleBlackjack
             return this.hit_btn;
         }
 
+        public Label getPlayerLbl()
+        {
+            return this.player_lbl;
+        }
+
         #region showCardsFunctions
         public void showCardsPlayer(Hand playerHand)
         {
             int count = 0;
             string currentCardPicture = "";
 
-            if (gc.playerHand.cards != null && gc.playerHand != null)
-                foreach (Card currentcard in gc.playerHand.cards)
+            if (gc.playerHands[gc.currentPlayer].cards != null && gc.playerHands[gc.currentPlayer] != null)
+                foreach (Card currentcard in gc.playerHands[gc.currentPlayer].cards)
                 {
                     if (currentcard != null && currentcard.suit != "")
                     {
@@ -202,7 +207,7 @@ namespace SimpleBlackjack
             int count = 0;
             string currentCardPicture = "";
 
-            if (gc.playerHand.cards != null && gc.playerHand != null)
+            if (gc.playerHands[gc.currentPlayer-1].cards != null && gc.playerHands[gc.currentPlayer-1] != null)
                 foreach (Card currentcard in gc.dealerHand.cards)
                 {
                     if (currentcard != null && currentcard.suit != "")
@@ -349,6 +354,24 @@ namespace SimpleBlackjack
             dealer_box3.Visible = false;
             dealer_box4.Visible = false;
             dealer_box5.Visible = false;
+        }
+
+        public void hideAndResetPlayerCards()
+        {
+            card1_box.Visible = false;
+            card2_box.Visible = false;
+            card3_box.Visible = false;
+            card4_box.Visible = false;
+            card5_box.Visible = false;
+            card6_box.Visible = false;
+            card7_box.Visible = false;
+            card1_box.Image = null;
+            card2_box.Image = null;
+            card3_box.Image = null;
+            card4_box.Image = null;
+            card5_box.Image = null;
+            card6_box.Image = null;
+            card7_box.Image = null;
         }
     }
 }
