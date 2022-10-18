@@ -56,7 +56,7 @@ namespace GameCardLib
             //form.showCardsPlayer(playerHands[currentPlayer]);
             playerHands[currentPlayer].evaluateHand();
             //form.getBottomTxt().Text = playerHands[currentPlayer].result + Environment.NewLine;
-            Logger.LogMessage("Player: " + currentPlayer + " was dealt two cards with the value " + playerHands[currentPlayer].sco);
+            Logger.LogMessage("Player: " + currentPlayer + " was dealt two cards with the value " + playerHands[currentPlayer].score);
         }
 
         public void hit()
