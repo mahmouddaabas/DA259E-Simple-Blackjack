@@ -48,6 +48,8 @@
             this.dealer_box4 = new System.Windows.Forms.PictureBox();
             this.dealer_lbl = new System.Windows.Forms.Label();
             this.player_lbl = new System.Windows.Forms.Label();
+            this.amountofplayers_txt = new System.Windows.Forms.TextBox();
+            this.numberofplayers_lbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card2_box)).BeginInit();
@@ -249,11 +251,29 @@
             this.player_lbl.TabIndex = 24;
             this.player_lbl.Text = "Player 0:";
             // 
+            // amountofplayers_txt
+            // 
+            this.amountofplayers_txt.Location = new System.Drawing.Point(1239, 13);
+            this.amountofplayers_txt.Name = "amountofplayers_txt";
+            this.amountofplayers_txt.Size = new System.Drawing.Size(26, 23);
+            this.amountofplayers_txt.TabIndex = 25;
+            // 
+            // numberofplayers_lbl
+            // 
+            this.numberofplayers_lbl.AutoSize = true;
+            this.numberofplayers_lbl.Location = new System.Drawing.Point(1186, 16);
+            this.numberofplayers_lbl.Name = "numberofplayers_lbl";
+            this.numberofplayers_lbl.Size = new System.Drawing.Size(47, 15);
+            this.numberofplayers_lbl.TabIndex = 26;
+            this.numberofplayers_lbl.Text = "Players:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1368, 756);
+            this.Controls.Add(this.numberofplayers_lbl);
+            this.Controls.Add(this.amountofplayers_txt);
             this.Controls.Add(this.player_lbl);
             this.Controls.Add(this.dealer_lbl);
             this.Controls.Add(this.dealer_box4);
@@ -290,6 +310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box4)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -315,5 +336,7 @@
         private PictureBox dealer_box4;
         private Label dealer_lbl;
         private Label player_lbl;
+        private TextBox amountofplayers_txt;
+        private Label numberofplayers_lbl;
     }
 }

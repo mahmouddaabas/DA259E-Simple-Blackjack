@@ -1,6 +1,7 @@
 
-using SimpleBlackjack.MoveToClassLibrary;
+using System.Reflection;
 using System.Windows.Forms;
+using GameCardLib;
 
 namespace SimpleBlackjack
 {
@@ -8,40 +9,76 @@ namespace SimpleBlackjack
     {
 
         private GameController gc;
+        private int amountOfPlayers;
         public MainForm()
         {
             InitializeComponent();
 
             //Create a GameController object and send the MainForm object to it.
-            gc = new GameController(this);
+            gc = new GameController();
             hideAllCards();
         }
-
-        public void test(String text)
-        {
-            MessageBox.Show(text);
-        }
-
         private void startgame_btn_Click(object sender, EventArgs e)
         {
             startgame_btn.Enabled = false;
+            amountOfPlayers = Convert.ToInt32(amountofplayers_txt.Text);
+            gc.amountOfPlayers = amountOfPlayers;
         }
 
         private void deal_btn_Click(object sender, EventArgs e)
         {
             gc.deal();
+            showCardsPlayer(gc.playerHands[gc.currentPlayer]);
+            bottom_txtbox.Text = gc.playerHands[gc.currentPlayer].result + Environment.NewLine;
             //deal_btn.Enabled = false;
         }
 
         private void hit_btn_Click(object sender, EventArgs e)
         {
             gc.hit();
+            showCardsPlayer(gc.playerHands[gc.currentPlayer]);
+            if (gc.playerHands[gc.currentPlayer].score >= 21 && gc.currentPlayer == gc.playerHands.Count)
+            {
+                int winner = gc.endGame(gc.playerHands, gc.dealerHand);
+                showCardsDealer(gc.dealerHand);
+                checkWinner(winner);
+            }
+            bottom_txtbox.Text = gc.playerHands[gc.currentPlayer].result + Environment.NewLine;
         }
 
         private void stand_btn_Click(object sender, EventArgs e)
         {
             gc.stand();
-            //stand_btn.Enabled = false;
+            if(gc.playerHands.Count == gc.currentPlayer)
+            {
+                int winner = gc.endGame(gc.playerHands, gc.dealerHand);
+                showCardsDealer(gc.dealerHand);
+                checkWinner(winner);
+                //bottom_txtbox.Text = "Player: " + winner + " has won!";
+                hit_btn.Enabled = false;
+            }
+            else if(gc.currentPlayer < gc.playerHands.Count)
+            {
+                hideAndResetPlayerCards();
+                player_lbl.Text = "Player " + gc.currentPlayer + ":";
+                bottom_txtbox.Text = "Player " + gc.currentPlayer + " turn.";
+            }
+        }
+
+        public void checkWinner(int winner)
+        {
+            if (winner.Equals(-1))
+            {
+                bottom_txtbox.Text = "Dealer has won! He got " + gc.dealerHand.score;
+            }
+            else if (winner.Equals(-2))
+            {
+                bottom_txtbox.Text = "Dealer blackjack, you lose!";
+            }
+            else
+            {
+                bottom_txtbox.Text = "Player: " + winner + " has won!";
+            }
         }
 
         public Button getStartBtn()

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -9,8 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="Resources\Cards\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameCardLib\GameCardLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
