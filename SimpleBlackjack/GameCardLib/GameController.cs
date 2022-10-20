@@ -1,4 +1,7 @@
 ﻿using Utilities;
+using DataAccessLayer.Data;
+using DataAccessLayer.Models;
+using DataAccessLayer;
 
 namespace GameCardLib
 {
@@ -18,6 +21,8 @@ namespace GameCardLib
         public int winnerIndex { get; set; }
         public int amountOfPlayers { get; set; }
 
+        private DatabaseManipulation dm;
+
         public GameController()
         {
             //Set the MainForm recieved in the constructor to the local variable.;
@@ -30,6 +35,13 @@ namespace GameCardLib
 
             Logger.writeMessage += clogger.LogToConsole;
             Logger.writeMessage += flogger.LogToFile;
+
+            dm = new DatabaseManipulation();
+        }
+
+        public IEnumerable<Player> getAllPlayers()
+        {
+            return dm.getPlayers();
         }
 
         public void createHands()
@@ -38,10 +50,10 @@ namespace GameCardLib
             {
                 for (int i = 0; i < amountOfPlayers; i++)
                 {
-                    Hand playerHand = new Hand(numcards);
+                    Hand playerHand = new Hand(numcards, GenerateName(5));
                     playerHands.Add(playerHand);
                 }
-                dealerHand = new Hand(numcards);
+                dealerHand = new Hand(numcards, "Dealer");
                 handsCreated = true;
             }
         }
@@ -56,7 +68,7 @@ namespace GameCardLib
             //form.showCardsPlayer(playerHands[currentPlayer]);
             playerHands[currentPlayer].evaluateHand();
             //form.getBottomTxt().Text = playerHands[currentPlayer].result + Environment.NewLine;
-            Logger.LogMessage("Player: " + currentPlayer + " was dealt two cards with the value " + playerHands[currentPlayer].score);
+            Logger.LogMessage(playerHands[currentPlayer].name + " was dealt two cards with the value " + playerHands[currentPlayer].score);
         }
 
         public void hit()
@@ -69,12 +81,12 @@ namespace GameCardLib
             {
                 //endGame(playerHands, dealerHand);
             }
-            Logger.LogMessage("Player: " + currentPlayer + " decides to hit. Their score is now: " + playerHands[currentPlayer].score);
+            Logger.LogMessage(playerHands[currentPlayer].name + " decides to hit. Their score is now: " + playerHands[currentPlayer].score);
         }
 
         public void stand()
         {
-            Logger.LogMessage("Player: " + currentPlayer + " stands.");
+            Logger.LogMessage(playerHands[currentPlayer].name + " stands.");
             currentPlayer++;
             if (currentPlayer == playerHands.Count)
             {
@@ -105,7 +117,7 @@ namespace GameCardLib
             if (playerHands[winnerIndex].score == 21)
             {
                 //form.getBottomTxt().Text = "Blackjack! Player " + winnerIndex +  " win!";
-                Logger.LogMessage("Blackjack! Player " + winnerIndex + " win!");
+                Logger.LogMessage("Blackjack!" + playerHands[currentPlayer].name + " win!");
             }
             else
             {
@@ -122,7 +134,7 @@ namespace GameCardLib
                 if (winnerScore > dealerHand.score && winnerScore < 21)
                 {
                     //form.getBottomTxt().Text = "Player: " + winnerIndex + " wins with: " + winnerScore;
-                    Logger.LogMessage("Player: " + winnerIndex + " wins with: " + winnerScore);
+                    Logger.LogMessage(playerHands[currentPlayer].name + " wins with: " + winnerScore);
                 }
                 else if (dealerHand.score == 21)
                 {
@@ -139,7 +151,7 @@ namespace GameCardLib
                 else if (dealerHand.score > 21)
                 {
                     //form.getBottomTxt().Text = "Dealer bust, Player: " + winnerIndex  +" wins!";
-                    Logger.LogMessage("Dealer bust, Player: " + winnerIndex + " wins!");
+                    Logger.LogMessage("Dealer bust!" + playerHands[currentPlayer].name + " wins!");
                 }
                 else if (dealerHand.score == winnerScore)
                 {
@@ -148,6 +160,25 @@ namespace GameCardLib
                 }
             }
             return winnerIndex;
+        }
+        public string GenerateName(int len)
+        {
+            Random r = new Random();
+            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+            string Name = "";
+            Name += consonants[r.Next(consonants.Length)].ToUpper();
+            Name += vowels[r.Next(vowels.Length)];
+            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+            while (b < len)
+            {
+                Name += consonants[r.Next(consonants.Length)];
+                b++;
+                Name += vowels[r.Next(vowels.Length)];
+                b++;
+            }
+
+            return Name;
         }
     }
 }

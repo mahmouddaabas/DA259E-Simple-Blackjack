@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameCardLib", "GameCardLib\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{522BCCE9-FF09-4155-8AD6-A188947AF304}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{BE39B34B-B792-4B70-9E30-7E3FDA45AC10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{522BCCE9-FF09-4155-8AD6-A188947AF304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{522BCCE9-FF09-4155-8AD6-A188947AF304}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522BCCE9-FF09-4155-8AD6-A188947AF304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE39B34B-B792-4B70-9E30-7E3FDA45AC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE39B34B-B792-4B70-9E30-7E3FDA45AC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE39B34B-B792-4B70-9E30-7E3FDA45AC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE39B34B-B792-4B70-9E30-7E3FDA45AC10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,10 +14,13 @@ namespace GameCardLib
         public int score { set; get; }
         public string result { set; get; }
 
-        public Hand(int numcards)
+        public string name { set; get; }
+
+        public Hand(int numcards, string name)
         {
             numberOfcards = numcards; //cards in hand
             cards = new List<Card>(); //list to hold cards
+            this.name = name;
             Card emptycard = new Card();
 
             for (int i = 0; i < numberOfcards; i++)
@@ -34,7 +37,7 @@ namespace GameCardLib
             {
                 currentdeck.createDeck();
             }
-            pickedcard = Utility.NumberBetween(2, currentdeck.cards.Count - 1);
+            pickedcard = Utility.NumberBetween(2, currentdeck.cards.Count - 1); 
             Card currentcard = currentdeck.cards.ElementAt(pickedcard);
             Card tobereplaced = new Card();
 

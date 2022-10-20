@@ -17,6 +17,12 @@ namespace SimpleBlackjack
             //Create a GameController object and send the MainForm object to it.
             gc = new GameController();
             hideAllCards();
+            loadPlayersFromDB();
+        }
+
+        public void loadPlayersFromDB()
+        {
+            players_datagrid.DataSource = gc.getAllPlayers().ToList();
         }
         private void startgame_btn_Click(object sender, EventArgs e)
         {
@@ -30,6 +36,7 @@ namespace SimpleBlackjack
             gc.deal();
             showCardsPlayer(gc.playerHands[gc.currentPlayer]);
             bottom_txtbox.Text = gc.playerHands[gc.currentPlayer].result + Environment.NewLine;
+            player_lbl.Text = gc.playerHands[gc.currentPlayer].name + " :";
             //deal_btn.Enabled = false;
         }
 
@@ -60,8 +67,8 @@ namespace SimpleBlackjack
             else if(gc.currentPlayer < gc.playerHands.Count)
             {
                 hideAndResetPlayerCards();
-                player_lbl.Text = "Player " + gc.currentPlayer + ":";
-                bottom_txtbox.Text = "Player " + gc.currentPlayer + " turn.";
+                player_lbl.Text = gc.playerHands[gc.currentPlayer].name + " :";
+                bottom_txtbox.Text = gc.playerHands[gc.currentPlayer].name+ ": turn.";
             }
         }
 
@@ -77,7 +84,7 @@ namespace SimpleBlackjack
             }
             else
             {
-                bottom_txtbox.Text = "Player: " + winner + " has won!";
+                bottom_txtbox.Text = gc.playerHands[gc.currentPlayer] + " has won!";
             }
         }
 
