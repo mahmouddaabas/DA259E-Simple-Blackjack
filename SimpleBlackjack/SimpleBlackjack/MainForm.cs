@@ -10,6 +10,7 @@ namespace SimpleBlackjack
 
         private GameController gc;
         private int amountOfPlayers;
+        private PlayerForm pf;
         public MainForm()
         {
             InitializeComponent();
@@ -17,12 +18,8 @@ namespace SimpleBlackjack
             //Create a GameController object and send the MainForm object to it.
             gc = new GameController();
             hideAllCards();
-            loadPlayersFromDB();
-        }
-
-        public void loadPlayersFromDB()
-        {
-            players_datagrid.DataSource = gc.getAllPlayers().ToList();
+            pf = new PlayerForm(gc);
+            pf.Show();
         }
         private void startgame_btn_Click(object sender, EventArgs e)
         {
@@ -74,18 +71,19 @@ namespace SimpleBlackjack
 
         public void checkWinner(int winner)
         {
-            if (winner.Equals(-1))
+            if (winner.Equals(99))
             {
                 bottom_txtbox.Text = "Dealer has won! He got " + gc.dealerHand.score;
             }
-            else if (winner.Equals(-2))
+            else if (winner.Equals(100))
             {
                 bottom_txtbox.Text = "Dealer blackjack, you lose!";
             }
             else
             {
-                bottom_txtbox.Text = gc.playerHands[gc.currentPlayer] + " has won!";
+                bottom_txtbox.Text = gc.playerHands[winner].name + " has won!";
             }
+            pf.loadPlayersFromDB();
         }
 
         public Button getStartBtn()

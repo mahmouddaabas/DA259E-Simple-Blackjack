@@ -39,6 +39,21 @@ namespace GameCardLib
             dm = new DatabaseManipulation();
         }
 
+        public BlackjackContext getContext()
+        {
+            return new BlackjackContext();
+        }
+
+        public void deletePlayerFromDatabase(int id)
+        {
+            dm.deletePlayerFromDatabase(id);
+        }
+
+        public void updatePlayerInDatabase(int id, string name, int newscore, string adress, string email)
+        {
+            dm.updatePlayerInDatabase(id, name, newscore, adress, email);
+        }
+
         public IEnumerable<Player> getAllPlayers()
         {
             return dm.getPlayers();
@@ -54,6 +69,7 @@ namespace GameCardLib
                     playerHands.Add(playerHand);
                 }
                 dealerHand = new Hand(numcards, "Dealer");
+                Logger.LogMessage("dealer created");
                 handsCreated = true;
             }
         }
@@ -104,13 +120,13 @@ namespace GameCardLib
 
         public int endGame(List<Hand> playerHands, Hand dealerHand)
         {
-
             for (int i = 0; i < playerHands.Count; i++)
             {
                 if (playerHands[i].score > winnerScore)
                 {
                     winnerScore = playerHands[i].score;
                     winnerIndex = i;
+                    dm.addPlayerToDatabase(playerHands[i].name, playerHands[i].score, "Random Address 5", "randomemail@gmail.com");
                 }
             }
 
@@ -121,7 +137,6 @@ namespace GameCardLib
             }
             else
             {
-                //MessageBox.Show(Convert.ToString(playerHands[winnerIndex].score));
                 dealerHand.dealCards(currentdeck, numcards);
                 dealerHand.evaluateHand();
                 //form.showCardsDealer(dealerHand);
@@ -134,24 +149,26 @@ namespace GameCardLib
                 if (winnerScore > dealerHand.score && winnerScore < 21)
                 {
                     //form.getBottomTxt().Text = "Player: " + winnerIndex + " wins with: " + winnerScore;
-                    Logger.LogMessage(playerHands[currentPlayer].name + " wins with: " + winnerScore);
+                    Logger.LogMessage(playerHands[winnerIndex].name + " wins with: " + winnerScore);
+                    return winnerIndex;
                 }
                 else if (dealerHand.score == 21)
                 {
                     //form.getBottomTxt().Text = "Dealer blackjack, you lose!";
                     Logger.LogMessage("Dealer blackjack, you lose!");
-                    return -2;
+                    return 100;
                 }
                 else if (dealerHand.score > winnerScore && dealerHand.score < 21)
                 {
                     //form.getBottomTxt().Text = "Dealer won with: " + dealerHand.score;
                     Logger.LogMessage("Dealer won with: " + dealerHand.score);
-                    return -1;
+                    return 99;
                 }
                 else if (dealerHand.score > 21)
                 {
                     //form.getBottomTxt().Text = "Dealer bust, Player: " + winnerIndex  +" wins!";
-                    Logger.LogMessage("Dealer bust!" + playerHands[currentPlayer].name + " wins!");
+                    Logger.LogMessage("Dealer bust!" + playerHands[winnerIndex].name + " wins!");
+                    return winnerIndex;
                 }
                 else if (dealerHand.score == winnerScore)
                 {

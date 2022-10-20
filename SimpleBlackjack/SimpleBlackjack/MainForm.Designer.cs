@@ -50,7 +50,6 @@
             this.player_lbl = new System.Windows.Forms.Label();
             this.amountofplayers_txt = new System.Windows.Forms.TextBox();
             this.numberofplayers_lbl = new System.Windows.Forms.Label();
-            this.players_datagrid = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card2_box)).BeginInit();
@@ -64,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.players_datagrid)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -269,21 +267,11 @@
             this.numberofplayers_lbl.TabIndex = 26;
             this.numberofplayers_lbl.Text = "Players:";
             // 
-            // players_datagrid
-            // 
-            this.players_datagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.players_datagrid.Location = new System.Drawing.Point(1116, 389);
-            this.players_datagrid.Name = "players_datagrid";
-            this.players_datagrid.RowTemplate.Height = 25;
-            this.players_datagrid.Size = new System.Drawing.Size(240, 209);
-            this.players_datagrid.TabIndex = 27;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1368, 756);
-            this.Controls.Add(this.players_datagrid);
             this.Controls.Add(this.numberofplayers_lbl);
             this.Controls.Add(this.amountofplayers_txt);
             this.Controls.Add(this.player_lbl);
@@ -321,7 +309,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealer_box4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.players_datagrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,6 +338,5 @@
         private Label player_lbl;
         private TextBox amountofplayers_txt;
         private Label numberofplayers_lbl;
-        private DataGridView players_datagrid;
     }
 }

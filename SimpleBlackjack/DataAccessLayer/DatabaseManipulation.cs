@@ -34,7 +34,7 @@ namespace DataAccessLayer
 
             Score score = new Score();
             score.ScoreId = player_id.ToList()[0];
-            score.PlayerScore = 14;
+            score.PlayerScore = playerscore;
             context.Add(score);
             context.SaveChanges();
 
@@ -49,7 +49,13 @@ namespace DataAccessLayer
         public void deletePlayerFromDatabase(int id)
         {
             BlackjackContext context = new BlackjackContext();
-            context.Database.ExecuteSqlRaw("exec deletePlayer {0}", id);
+            var player = context.Players.FirstOrDefault(player => player.PlayerId == id);
+            var score = context.Scores.FirstOrDefault(score => score.ScoreId == id);
+            var user = context.Users.FirstOrDefault(user => user.UserId == id);
+            context.Users.Remove(user);
+            context.Scores.Remove(score);
+            context.Players.Remove(player);
+            context.SaveChanges();
         }
 
         public void updatePlayerInDatabase(int playerid, string name, int newscore, string address, string email)
@@ -69,7 +75,9 @@ namespace DataAccessLayer
         public IEnumerable<Player> getPlayers()
         {
             BlackjackContext context = new BlackjackContext();
-            return context.Players;
+            //return context.Players;
+            var data = context.Players;
+            return data;
         }
     }
 }
